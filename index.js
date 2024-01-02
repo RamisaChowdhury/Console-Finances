@@ -86,3 +86,61 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
+
+//The net total amount of Profit/Losses over the entire period.
+console.log("Financial Analysis")
+console.log("----------------")
+
+var totalMonths = finances.length
+
+console.log("Total Months: " + totalMonths)
+
+
+//The net total amount of Profit/Losses over the entire period.
+let netTotal = 0;
+for (let i = 0; i < finances.length; i++){
+    netTotal += finances[i][1];
+}
+
+console.log("Total: $" + netTotal)
+
+
+//The average of the changes in Profit/Losses over the entire period.
+let monthlyChange = 0;
+for (let i = 1; i < finances.length; i++){
+    monthlyChange += (finances[i][1] - finances[i-1][1]);
+}
+
+var avgChange = monthlyChange / (totalMonths-1)
+
+console.log("Average Change: " + avgChange.toFixed(2));
+
+
+//The greatest decrease in Profit/Losses (date and difference in the amounts) over the entire period.
+var maxIncrease = 0;
+var maxIncreaseMonth = "";
+let monthlyDifference = 0;
+for (let i = 1; i < finances.length; i++){
+    monthlyDifference = (finances[i][1] - finances[i-1][1]);
+    if (monthlyDifference > maxIncrease){
+        maxIncrease = monthlyDifference
+        maxIncreaseMonth = finances[i][0]
+    }
+}
+
+console.log("Greatest Increase in Profits/Losses: " + maxIncreaseMonth + " ($" + maxIncrease + ")")
+
+
+//The greatest decrease in Profit/Losses (date and difference in the amounts) over the entire period.
+var maxDecrease = 0;
+var maxDecreaseMonth = "";
+let monthlyDecrease = 0;
+for (let i = 1; i < finances.length; i++){
+    monthlyDecrease = (finances[i][1] - finances[i-1][1]);
+    if (monthlyDecrease < maxDecrease){
+        maxDecrease = monthlyDecrease
+        maxDecreaseMonth = finances[i][0]
+    }
+}
+
+console.log("Greatest Decrease in Profits/Losses: " + maxDecreaseMonth + " ($" + maxDecrease + ")")
